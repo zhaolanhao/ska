@@ -47,6 +47,7 @@
                 /*两个回调函数*/
                 success: function (result) {
                     layer.msg("登陆" + result);
+                    window.location.href="admin.html";
                 },
                 error: function () {
                     layer.msg("请求服务器失败!");
@@ -92,6 +93,7 @@
                 /*两个回调函数*/
                 success: function (result) {
                     layer.msg("注册" + result);
+                    window.location.href="index.html";
                 },
                 error: function () {
                     layer.msg("请求服务器失败!");

@@ -18,7 +18,7 @@ public class UserDAOImpl implements IUserDAO {
     SqlSessionFactory sessionFactoryBean;
 
     @Override
-    public String login(String uname, String upwd) throws  Exception{
+    public String login(String uname, String upwd) throws Exception {
 
         SqlSession sqlSession = sessionFactoryBean.openSession(true);//true  开启事务
         String statment = "com.isoft.mapping.userMapper.login";
@@ -26,9 +26,9 @@ public class UserDAOImpl implements IUserDAO {
         map.put("uname", uname);
         map.put("upwd", upwd);
         System.out.println(map);
-        List list = sqlSession.selectList(statment,map);
+        List list = sqlSession.selectList(statment, map);
         System.out.println(list);
-        if (list!=null)
+        if (list != null)
             return "success";
         else
             return "fault";
@@ -36,7 +36,16 @@ public class UserDAOImpl implements IUserDAO {
 
     @Override
     public boolean register(String r_uname, String r_upwd, String email) {
-        System.out.println(email);
-        return true;
+        SqlSession sqlSession = sessionFactoryBean.openSession(true);
+        String statement = "com.isoft.mapping.userMapper.register";
+        Map map = new HashMap();
+        map.put("uname", r_uname);
+        map.put("upwd", r_upwd);
+        map.put("email", email);
+        int i = sqlSession.insert(statement, map);
+        if (i > 0)
+            return true;
+        else
+            return false;
     }
 }
